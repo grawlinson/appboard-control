@@ -1,3 +1,28 @@
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [AppBoard Control](#appboard-control)
+	- [C# GUI Specifications](#c-gui-specifications)
+		- [Setup Tab](#setup-tab)
+		- [Digital I/O Tab](#digital-io-tab)
+		- [Potentiometer Tab](#potentiometer-tab)
+		- [Light Tab](#light-tab)
+		- [Temperature Control Tab](#temperature-control-tab)
+	- [AppBoard Specifications](#appboard-specifications)
+		- [Digital I/O](#digital-io)
+		- [Analog I/O](#analog-io)
+		- [Timer](#timer)
+		- [Serial Port](#serial-port)
+	- [Communications Protocol](#communications-protocol)
+		- [Examples](#examples)
+			- [Reading PINA (viewed from the PC)](#reading-pina-viewed-from-the-pc)
+			- [Reading PINA (viewed from the MCU)](#reading-pina-viewed-from-the-mcu)
+			- [Writing the motor speed (viewed from the PC)](#writing-the-motor-speed-viewed-from-the-pc)
+			- [Writing the motor speed (viewed from the MCU)](#writing-the-motor-speed-viewed-from-the-mcu)
+		- [Table of Instructions](#table-of-instructions)
+	- [LICENSE](#license)
+
+<!-- /TOC -->
+
 # AppBoard Control
 
 This is an old university assignment, the majority of this has been summarised from the assignment handout.
