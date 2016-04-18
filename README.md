@@ -136,7 +136,7 @@ In all cases, if the start byte is not received by the MCU ISR while in the star
 ### Table of Instructions
 
 Instruction|Code|MCU Action
--|-|-
+-----------|----|----------
 TXCHECK|0x00|Return 0x0F to indicate communications is working
 READ_PINA|0x01|Return contents of PINA
 READ_POT1|0x02| Read ADC Channel 2 & return ADCH
