@@ -21,53 +21,72 @@ The GUI was developed using Visual Studio 2013, but should work with VS 2015.
 Allows user to specify which Serial COM port & baud rate via two drop-down boxes. The COM ports are automatically populated with available COM ports when the GUI application is initially started. The baud rate options are (9600, 19200, 38400, 57600 & 115200) with a default value of 38400 bps.
 
 When the connect button is pressed, the application will attempt to open the selected port & ensure communication with the AppBoard is working. If connection & communications is OK, the GUI will light up the TX_OK LED & display "CONNECTED" somewhere. The other tabs will then be enabled.
+
 ### Digital I/O Tab
+
 ![Image of Digital I/O Tab][tab-digital]
 
 The digital I/O tab allows the GUI to read each of the PORTA pins & write to the LEDs on PORTC. When the PINA pins are on, the GUI bulbs will turn on. When the PORTC LEDs are turned on, the 7-Segment GUI will show the LED status as displayed on the board.
 
 The third-party UI controls shown in the image are the [LED Bulb][ledbulb] & [Seven Segment][7seg].
+
 ### Potentiometer Tab
+
 ![Image of Potentiometer Tab][tab-potentiometer]
 
 This tab allows users to view the current voltage levels (0-5V) of both potentiometers on the board.
 
 The third-party UI control shown is the [Aqua Gauge][aquagauge].
+
 ### Light Tab
+
 ![Image of Light Tab][tab-light]
 
 The light tab allows the user to adjust the lamp brighness via vertical scroll bar (0-100%), and the light level is read by the on-board photodiode.
+
 ### Temperature Control Tab
+
 ![Image of Temperature Control Tab][tab-control]
 
 The temperature control tab implements a temperature PI controller with real-time plotting & tuning. On the board, the temperature sensor is below a heater element, which has a fan on top. The PI controller will attempt to control the temperature via fan motor speed.
 
 Note: The picture is not up to date. The graph actually has 3 different lines; measured temperature, desired temperature & motor speed for easier debugging.
+
 ## AppBoard Specifications
+
 Written in C using [Atmel Studio][atmelstudio]. It has the following responsibilities/tasks. It will continuously poll to see whether an instruction has been received by the serial port, and will respond accordingly before waiting for the next instruction.
+
 ### Digital I/O
+
 * Read the value of PINA
 * Write the value of PORTC
+
 ### Analog I/O
+
 * Using the on-board analog to digital converter (ADC) to take voltage measurements of the following sensors:
     * Light sensor
     * Temperature sensor (50mV/degree Celsius)
     * Potentiometer 1 (AVCC = 5V)
     * Potentiometer 2 (AVCC = 5V)
-
 * Each  measurement will return the 8-bit MSB of the ADC
 * Store measurement as an unsigned char, convertion to voltage will be done in the C# GUI
+
 ### Timer
+
 * Using Timer 1 to control the PWM duty-cycle of the following peripherals:
     * Motor (OCR1A)
     * Lamp (OCR1B)
     * Heater (OCR1C)
 * Timer1 set to use Fast PWM with a TOP value of ICR1 (399) which provides a PWM frequency of 20 kHz if a prescaler of 1 is used. The peripheral OCR registers will accept a range from 0-399 therefore 16-bit integers are required to set the 3 peripheral registers.
+
 ### Serial Port
+
 * UART1 used to receive instructions & data from the C# GUI
 * Use an interrupt with state machine to decode the information being received over the serial port. See the communication protocol below for details of the state machine.
 * Setup with a baudrate of 38400bps & 8N1 (8 data bits, no parity & 1 stop bit)
+
 ## Communications Protocol
+
 To communicate between the PC & MCU, a custom protocol is used on top of the Serial port. It has two forms:
 
 Sending a READ instruction from the PC to the MCU:
@@ -132,6 +151,7 @@ SET_MOTOR|0x0D| Write the received integer to OCR1A, return 0x0D
 Note: All write instructions are 0x0A or greater. This is used by the UART_TX_receive interrupt to determine whether to expect the data bytes next, or the stop byte. Start & stop bytes are not required to be transmitted back to the PC, only 1 byte is ever returned.
 
 ## LICENSE
+
 The MIT License (MIT)
 
 Copyright (c) 2015 George Rawlinson <mailto:george@rawlinson.net.nz>
