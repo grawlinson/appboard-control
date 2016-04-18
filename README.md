@@ -1,13 +1,13 @@
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-- [AppBoard Control](#appboard-control)
+- [Introduction](#introduction)
 	- [C# GUI Specifications](#c-gui-specifications)
 		- [Setup Tab](#setup-tab)
 		- [Digital I/O Tab](#digital-io-tab)
 		- [Potentiometer Tab](#potentiometer-tab)
 		- [Light Tab](#light-tab)
 		- [Temperature Control Tab](#temperature-control-tab)
-	- [AppBoard Specifications](#appboard-specifications)
+	- [MCU Specifications](#mcu-specifications)
 		- [Digital I/O](#digital-io)
 		- [Analog I/O](#analog-io)
 		- [Timer](#timer)
@@ -23,7 +23,7 @@
 
 <!-- /TOC -->
 
-# AppBoard Control
+# Introduction
 
 This is an old university assignment, the majority of this has been summarised from the assignment handout.
 
@@ -77,7 +77,7 @@ The temperature control tab implements a temperature PI controller with real-tim
 
 Note: The picture is not up to date. The graph actually has 3 different lines; measured temperature, desired temperature & motor speed for easier debugging.
 
-## AppBoard Specifications
+## MCU Specifications
 
 Written in C using [Atmel Studio][atmelstudio]. It has the following responsibilities/tasks. It will continuously poll to see whether an instruction has been received by the serial port, and will respond accordingly before waiting for the next instruction.
 
